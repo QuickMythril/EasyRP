@@ -26,25 +26,21 @@ WinWait, ahk_exe <.exe file name>  ;Script waits until the specified process sta
 ;Provide the same .exe name in the brackets.
 if WinExist(ahk_exe <.exe file name>)  ;Checks if the specified window exists.
 	{
-		FileDelete, <config.ini File Path>  ;Specify the path of your .ini file here.
-
-		FileAppend,
-			(		
-				[Identifiers]
-				ClientID= <Specify the ID of the App you created on discord.com/developers/applications/ here>
-
-				[State]
-				State= <User Custom State>
-				Details= <User Custom Details>
-				StartTimestamp= %Time%
-				EndTimestamp= 
-
-				[Images]
-				LargeImage= <Specify the name of the Large image that you want which you uploaded on discord.com/developers/applications/>
-				LargeImageTooltip= <User Custom Large image cursor hover text>
-				SmallImage= <Specify the name of the Small image that you want which you uploaded on discord.com/developers/applications/>
-				SmallImageTooltip= <User Custom Small image cursor hover text>
-			), <config.ini File Path>  ;Specify the path of your .ini file here.
+		;Specify the ID of the App you created on discord.com/developers/applications/ here
+		IniWrite, <Application ID>, <config.ini File Path>, Identifiers, ClientID
+		
+		IniWrite, <User Custom State>, <config.ini File Path>, State, State
+		IniWrite, <User Custom Details>, <config.ini File Path>, State, Details
+		IniWrite, %Time%, <config.ini File Path>, State, StartTimestamp
+		IniWrite, "", <config.ini File Path>, State, EndTimestamp
+		
+		;Specify the name of the Large image that you want which you uploaded on discord.com/developers/applications/
+		IniWrite, <User Custom State>, <config.ini File Path>, Images, LargeImage
+		IniWrite, <User Custom Large image cursor hover text>, <config.ini File Path>, Images, LargeImageTooltip
+		
+		;Specify the name of the Small image that you want which you uploaded on discord.com/developers/applications/
+		IniWrite, <User Custom State>, <config.ini File Path>, Images, SmallImage
+		IniWrite, <User Custom Small image cursor hover text>, <config.ini File Path>, Images, SmallImageTooltip
 		
 		Run, <Put easyrp.exe file Path here>, ,Hide  ;Runs the easyrp.exe file in a hidden mode.
 	}
